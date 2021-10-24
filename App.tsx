@@ -1,35 +1,30 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
 } from 'react-native';
 import MovieList from './MovieList';
+import {store} from './store/store';
+import MovieDetail from './MovieDetail';
 
 const App: React.FC = () => {
   const isDarkMode = useColorScheme();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.container}>
-        <Text
-          style={[
-            {
-              color: isDarkMode ? '#fff' : '#000',
-            },
-          ]}>
-          Hello World
-        </Text>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          translucent
+          backgroundColor="transparent"
+        />
         <MovieList />
-      </ScrollView>
-    </SafeAreaView>
+        {/* <MovieDetail /> */}
+      </SafeAreaView>
+    </Provider>
   );
 };
 
